@@ -97,7 +97,7 @@ my $drmcninja_comic = $stream->get_tag("img");
 
 my $drmcninja_source = $drmcninja_comic->[1]{'src'};
 my $drmcninja_title = $drmcninja_comic->[1]{'title'};
-my $drmcninja_alt = $drmcninja_alt->[1]{'alt'};
+my $drmcninja_alt = $drmcninja_comic->[1]{'alt'};
 
 # Generate a bunch of output:
 my $cgi = new CGI;
