@@ -90,7 +90,7 @@ my $drmcninja_stream = HTML::TokeParser->new(\$agent->{content});
 
 my $drmcninja_div = $drmcninja_stream->get_tag("div");
 while ($drmcninja_div->[1]{id} and $drmcninja_div->[1]{id} ne 'comic') {
-    $drmcninja_div = $drmcninja_stream->get_tag("div");
+    $drmcninja_div = $stream->get_tag("div");
 }
 # get the cartoon:
 my $drmcninja_comic = $drmcninja_stream->get_tag("img");
@@ -108,7 +108,7 @@ my $dinosaur_stream = HTML::TokeParser->new(\$agent->{content});
 my $dinosaur_comic = $dinosaur_stream->get_tag("img");
 #dinosaur comics doesnt have good ids or names...but the comic image always is located at the same directory!!!
 while ($dinosaur_comic->[1]{src} and $dinosaur_comic->[1]{src} !~ "http://www.qwantz.com/comics/") {
-    $dinosaur_comic = $dinosaur_stream->get_tag("img");
+    $dinosaur_comic = $stream->get_tag("img");
 }
 
 my $dinosaur_source = $dinosaur_comic->[1]{'src'};
