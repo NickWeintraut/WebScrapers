@@ -116,9 +116,7 @@ while ($dinosaur_comic->[1]{src} and $dinosaur_comic->[1]{src} =~ "http://www.qw
     #if($dinosaur_comic->[1]{src}){
     #  print $cgi->p($dinosaur_stream->get_tag("img")->[1]{src}), "\n";
     #}
-
     $dinosaur_comic = $dinosaur_stream->get_tag("img");
-
 }
 
 my $dinosaur_source = $dinosaur_comic->[1]{'src'};
