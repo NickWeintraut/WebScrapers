@@ -81,6 +81,24 @@ my $pennyarcade_comic = $stream->get_tag("img");
 my $pennyarcade_source = $pennyarcade_comic->[1]{'src'};
 my $pennyarcade_title = $pennyarcade_comic->[1]{'alt'};
 
+####################################
+# Get Dr. McNinja
+####################################
+
+$agent->get("http://www.drmcninja.com");
+my $drmcninja_stream = HTML::TokeParser->new(\$agent->{content});
+
+my $drmcninja_comic_div = $drmcninja_stream->get_tag("div");
+while ($drmcninja_comic_div->[1]{id} and $drmcninja_div->[1]{id} ne 'comic') {
+    $drmcninja_comic_div = $stream->get_tag("div");
+}
+# get the cartoon:
+my $drmcninja_comic = $stream->get_tag("img");
+
+my $drmcninja_source = $drmcninja_comic->[1]{'src'};
+my $drmcninja_title = $drmcninja_comic->[1]{'title'};
+my $drmcninja_alt = $drmcninja_alt->[1]{'alt'};
+
 # Generate a bunch of output:
 my $cgi = new CGI;
 
@@ -103,6 +121,9 @@ print $cgi->h1("Penny Arcade: $pennyarcade_title");
 
 print $cgi->img({src=>$pennyarcade_source, alt=>$pennyarcade_title}), "\n\n";
 
+print $cgi->h1("Dr. McNinja: $drmcnina_title");
+
+print $cgi->img({src=>$drmcninja_source, alt=>$drmcninja_alt}), "\n\n";
 
 # ALL DONE!
 print $cgi->end_html, "\n";
