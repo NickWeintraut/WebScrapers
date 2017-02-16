@@ -68,7 +68,7 @@ my $pbf_title = $pbf_comic->[1]{'alt'};
 # Get Penny Arcade
 ####################################
 
-$agent->get("http://www.penny-arcade.com/comics");
+$agent->get("http://www.penny-arcade.com/comic");
 # create new HTML parser and get the content from the web agent
 my $pennyarcade_stream = HTML::TokeParser->new(\$agent->{content});
 my $pennyarcade_comic_div = $pennyarcade_stream->get_tag("div");
