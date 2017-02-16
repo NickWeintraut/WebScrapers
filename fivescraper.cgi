@@ -64,6 +64,22 @@ my $pbf_source = "http://www.pbfcomics.com" . $pbf_comic->[1]{'src'};
 #alt tag stores the title of the comic
 my $pbf_title = $pbf_comic->[1]{'alt'};
 
+####################################
+# Get Penny Arcade
+####################################
+
+$agent->get("http://www.penny-arcade.com/comics");
+# create new HTML parser and get the content from the web agent
+my $pennyarcade_stream = HTML::TokeParser->new(\$agent->{content});
+my $pennyarcade_comic_div = $pennyarcade_stream->get_tag("div");
+while ($pennyarcade_comic_div->[1]{id} and $pennyarcade_comic_div->[1]{id} ne 'comicFrame') {
+    $pennyarcade_comic_div = $stream->get_tag("div");
+}
+# get the cartoon:
+my $pennyarcade_comic = $stream->get_tag("img");
+
+my $pennyarcade_source = $pennyarcade_comic->[1]{'src'};
+my $pennyarcade_title = $pennyarcade_comic->[1]{'alt'};
 
 # Generate a bunch of output:
 my $cgi = new CGI;
@@ -82,6 +98,10 @@ print $cgi->h1("Perry Bible Fellowship: $pbf_title");
 print $cgi->img({src=>$pbf_source, alt=>$pbf_title}), "\n\n";
 
 print $cgi->p($pbf_comic_link), "\n";
+
+print $cgi->h1("Penny Arcade: $pennyarcade_title");
+
+print $cgi->img({src=>$pennyarcade_source, alt=>$pennyarcade_title}), "\n\n";
 
 
 # ALL DONE!
