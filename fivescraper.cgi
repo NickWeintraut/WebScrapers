@@ -121,7 +121,7 @@ print $cgi->h1("Penny Arcade: $pennyarcade_title");
 
 print $cgi->img({src=>$pennyarcade_source, alt=>$pennyarcade_title}), "\n\n";
 
-print $cgi->h1("Dr. McNinja: $drmcnina_title");
+print $cgi->h1("Dr. McNinja: $drmcninja_title");
 
 print $cgi->img({src=>$drmcninja_source, alt=>$drmcninja_alt}), "\n\n";
 
