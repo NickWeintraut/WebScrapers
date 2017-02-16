@@ -73,7 +73,7 @@ $agent->get("http://www.penny-arcade.com/comic");
 my $pennyarcade_stream = HTML::TokeParser->new(\$agent->{content});
 my $pennyarcade_comic_div = $pennyarcade_stream->get_tag("div");
 while ($pennyarcade_comic_div->[1]{id} and $pennyarcade_comic_div->[1]{id} ne 'comicFrame') {
-    $pennyarcade_comic_div = $stream->get_tag("div");
+    $pennyarcade_comic_div = $pennyarcade_stream->get_tag("div");
 }
 # get the cartoon:
 my $pennyarcade_comic = $stream->get_tag("img");
