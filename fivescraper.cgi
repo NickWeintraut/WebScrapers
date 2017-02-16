@@ -99,6 +99,23 @@ my $drmcninja_source = $drmcninja_comic->[1]{'src'};
 my $drmcninja_title = $drmcninja_comic->[1]{'title'};
 my $drmcninja_alt = $drmcninja_comic->[1]{'alt'};
 
+####################################
+# Get Dinosaur Comics
+####################################
+
+$agent->get("http://www.quantz.com");
+my $dinosaur_stream = HTML::TokeParser->new(\$agent->{content});
+my $dinosaur_comic = $dinosaur_stream->get_tag("img");
+#dinosaur comics doesnt have good ids or names...but the comic image always is located at the same directory!!!
+while ($dinosaur_comic->[1]{src} and $dinosaur_comic->[1]{src} !~ "http://www.qwantz.com/comics/") {
+    $dinosaur_comic = $stream->get_tag("img");
+}
+
+my $dinosaur_source = $dinosaur_comic->[1]{'src'};
+my $dinosaur_title = $dinosaur_comic->[1]{'title'};
+
+
+
 # Generate a bunch of output:
 my $cgi = new CGI;
 
@@ -124,6 +141,10 @@ print $cgi->img({src=>$pennyarcade_source, alt=>$pennyarcade_title}), "\n\n";
 print $cgi->h1("Dr. McNinja: $drmcninja_title");
 
 print $cgi->img({src=>$drmcninja_source, alt=>$drmcninja_alt}), "\n\n";
+
+print $cgi->h1("Dinosaur Comic!");
+
+print $cgi->img({src=>$dinosaur_source, alt=>$dinosaur_title}), "\n\n";
 
 # ALL DONE!
 print $cgi->end_html, "\n";
