@@ -113,7 +113,7 @@ my $dinosaur_stream = HTML::TokeParser->new(\$agent->{content});
 my $dinosaur_comic = $dinosaur_stream->get_tag("img");
 #dinosaur comics doesnt have good ids or names...but the comic image always is located at the same directory!!!
 while ($dinosaur_comic->[1]{src} and $dinosaur_comic->[1]{src} !~ "http://www.qwantz.com/comics/") {
-    print $cgi->p($dinosaur_stream->get_tag("img")), "\n";
+    print $cgi->p($dinosaur_stream->get_tag("img")->[1]{'src'}), "\n";
     $dinosaur_comic = $dinosaur_stream->get_tag("img");
 
 }
