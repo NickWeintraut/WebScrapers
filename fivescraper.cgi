@@ -105,6 +105,8 @@ my $drmcninja_alt = $drmcninja_comic->[1]{'alt'};
 # Generate a bunch of output:
 my $cgi = new CGI;
 
+print $cgi->header(-type=>'text/html'),
+      $cgi->start_html('Sample Screen Scraper');
 
 $agent->get("http://www.quantz.com");
 my $dinosaur_stream = HTML::TokeParser->new(\$agent->{content});
@@ -118,9 +120,6 @@ while ($dinosaur_comic->[1]{src} and $dinosaur_comic->[1]{src} !~ "http://www.qw
 
 my $dinosaur_source = $dinosaur_comic->[1]{'src'};
 my $dinosaur_title = $dinosaur_comic->[1]{'title'};
-
-print $cgi->header(-type=>'text/html'),
-      $cgi->start_html('Sample Screen Scraper');
 
 print $cgi->h1("SMBC"), "\n";
 
